@@ -1,0 +1,28 @@
+﻿<Window x:Class="SB01.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Neat" Height="367" Width="523" HorizontalAlignment="Left" ResizeMode="NoResize" BorderBrush="#FF470C0C">
+    <Grid>
+        <TextBox x:Name="TextBoxSource" Margin="115,79,86,0" TextWrapping="Wrap" Height="23" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="TextBoxDestination" Height="23" Margin="115,107,86,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="TextBoxArchive" Height="23" Margin="115,135,86,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label Content="Source" HorizontalAlignment="Left" Margin="29,76,0,0" VerticalAlignment="Top"/>
+        <Label Content="Destination" HorizontalAlignment="Left" Margin="29,103,0,0" VerticalAlignment="Top"/>
+        <Label Content="Archive" HorizontalAlignment="Left" Margin="29,132,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="CheckBoxUseYearStructure" Content="Use yearly directory structure" HorizontalAlignment="Left" Margin="50,175,0,0" VerticalAlignment="Top" Checked="CheckBoxUseYearStructure_Checked" Unchecked="CheckBoxUseYearStructure_Unchecked" Grid.ColumnSpan="2"/>
+        <CheckBox x:Name="CheckBoxOnlyLarge" Content="Only for large (&gt;100) directories" HorizontalAlignment="Left" Margin="70,195,0,0" VerticalAlignment="Top" IsEnabled="False" Grid.ColumnSpan="2"/>
+        <Button x:Name="ButtonSource" Content="..." HorizontalAlignment="Right" Margin="0,79,61,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="0.173,0.92" Height="23" Click="ButtonSource_Click" Grid.Column="1"/>
+        <Button x:Name="ButtonDestination" Content="..." HorizontalAlignment="Right" Margin="0,107,61,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="0.173,0.92" Height="23" Click="ButtonDestination_Click" Grid.Column="1"/>
+        <Button x:Name="ButtonArchive" Content="..." Margin="0,135,61,0" VerticalAlignment="Top" RenderTransformOrigin="0.173,0.92" Height="23" HorizontalAlignment="Right" Width="20" Click="ButtonArchive_Click" Grid.Column="1"/>
+        <Button x:Name="ButtonGo" Content="Start" Margin="0,240,61,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="87" Height="41" Click="ButtonGo_Click" Background="#FF741919" Foreground="#FFBBBABA" FontWeight="Bold"/>
+        <Label Content="Neat Media" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF470C0C"/>
+        <Label Content="Media file renamer and organizer" HorizontalAlignment="Left" Margin="10,45,0,0" VerticalAlignment="Top" Foreground="#FF5B5B5B"/>
+        <ProgressBar x:Name="ProgressBarMain" Height="10" Margin="50,309,50,0" VerticalAlignment="Top" Foreground="#FF470C0C"/>
+        <Label x:Name="LabelProgress" Content="Ready" HorizontalAlignment="Left" Margin="50,287,0,0" VerticalAlignment="Top">
+            <Label.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.GrayTextColorKey}}"/>
+            </Label.Foreground>
+        </Label>
+        <Button x:Name="ButtonShowConsole" Content="Show Console" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="92" Click="ButtonShowConsole_Click"/>
+    </Grid>
+</Window>

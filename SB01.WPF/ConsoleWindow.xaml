@@ -1,0 +1,11 @@
+﻿<Window x:Class="SB01.WPF.ConsoleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ConsoleWindow" Height="313.433" Width="516.418">
+    <Grid>
+        <Label Content="Console" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <ScrollViewer>
+            <TextBlock x:Name="TextBlockConsole" Margin="10,57,10,10" TextWrapping="Wrap" Background="#FFE8E8E8"/>
+        </ScrollViewer>
+    </Grid>
+</Window>
