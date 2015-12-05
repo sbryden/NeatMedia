@@ -24,5 +24,6 @@
             </Label.Foreground>
         </Label>
         <Button x:Name="ButtonShowConsole" Content="Show Console" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="92" Click="ButtonShowConsole_Click"/>
+        <Button x:Name="ButtonReloadDatabase" Content="Reload Database" HorizontalAlignment="Right" Margin="0,10,113,0" VerticalAlignment="Top" Width="92" Click="ButtonReloadDatabase_Click"/>
     </Grid>
 </Window>

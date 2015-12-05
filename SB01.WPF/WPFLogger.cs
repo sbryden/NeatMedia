@@ -11,12 +11,12 @@ namespace SB01.WPF
     {
         public void LogInfo(string message)
         {
-            ConsoleWindow.AddConsoleText("/n" + "INFO     " + message);
+            ConsoleWindow.AddConsoleText("/n" + "INFO     " + message + Environment.NewLine);
         }
 
         public void LogError(string message)
         {
-            ConsoleWindow.AddConsoleText("/n" + "ERROR    " + message);
+            ConsoleWindow.AddConsoleText("/n" + "ERROR    " + message + Environment.NewLine);
         }
     }
 }

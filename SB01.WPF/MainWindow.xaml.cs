@@ -105,5 +105,12 @@ namespace SB01.WPF
         {
             ConsoleWindow.ShowConsole();
         }
+
+        private void ButtonReloadDatabase_Click(object sender, RoutedEventArgs e)
+        {
+            Analyzer analyzer = new Analyzer();
+            ConsoleWindow.ShowConsole();
+            analyzer.CheckUpdateDatabase(TextBoxDestination.Text);
+        }
     }
 }

@@ -12,8 +12,7 @@ namespace SB01.Core
     {
         private string _destinationDirectory;
         private string _archiveDirectory;
-        private string[] _supportedExtensions = { ".jpg", ".jpeg", ".bmp", ".gif", ".ico", ".jpe", ".png", ".tiff", ".tif" };
-        private bool _useYearStructure = false;
+                private bool _useYearStructure = false;
 
         public Renamer(string destinationDirectory)
         {
@@ -240,7 +239,7 @@ namespace SB01.Core
             foreach (string filePath in Directory.GetFiles(sourceDirectoryPath))
             {
                 FileInfo fileInfo = new FileInfo(filePath);
-                if (_supportedExtensions.Contains(fileInfo.Extension, StringComparer.CurrentCultureIgnoreCase))
+                if (Configuration.SupportedExtensions.Contains(fileInfo.Extension, StringComparer.CurrentCultureIgnoreCase))
                     RenameFile(filePath);
             }
         }
@@ -265,7 +264,7 @@ namespace SB01.Core
                     backgroundWorker.ReportProgress((i * 100) / totalFiles, string.Format("Processing: {0}", filePath));
 
                     FileInfo fileInfo = new FileInfo(filePath);
-                    if (_supportedExtensions.Contains(fileInfo.Extension, StringComparer.CurrentCultureIgnoreCase))
+                    if (Configuration.SupportedExtensions.Contains(fileInfo.Extension, StringComparer.CurrentCultureIgnoreCase))
                         RenameFile(filePath);
 
                     i++;

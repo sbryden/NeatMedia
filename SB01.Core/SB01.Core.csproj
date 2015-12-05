@@ -46,6 +46,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration.cs" />
     <Compile Include="FileMetadata.cs" />
     <Compile Include="FileUtils.cs" />
     <Compile Include="Logging\DefaultLogger.cs" />
