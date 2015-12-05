@@ -54,8 +54,6 @@ namespace SB01.WPF
 
         private void ButtonGo_Click(object sender, RoutedEventArgs e)
         {
-            
-
             string source = TextBoxSource.Text;
             string destination = TextBoxDestination.Text;
             string archive = TextBoxArchive.Text;
@@ -72,7 +70,7 @@ namespace SB01.WPF
             MessageBoxResult messageBoxResult = MessageBox.Show(this, string.Format("Move and rename all media from {0} to {1}?", source, destination), "Confirm", MessageBoxButton.OKCancel);
             if (messageBoxResult == MessageBoxResult.OK)
             {
-                Renamer renamer = new Renamer(destination, archive);
+                Renamer renamer = new Renamer(destination, archive, useYearStructure);
                 //renamer.Go(source);
                 ButtonGo.IsEnabled = false;
                 renamer.GoAsync(source, (percent, message) =>

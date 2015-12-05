@@ -20,22 +20,15 @@ namespace SB01.UnitTests.Tests
         [TestMethod]
         public void TestGetAllData()
         {
-            MediaMetadataRepo repo = new MediaMetadataRepo();
-            List<AnalyzedFileData> allAnalyzedFileData = repo.GetAllAnalyzedFileData();
+            MediaMetadataRepo repo = MediaMetadataRepo.Instance();
+            List<FileMetadata> allAnalyzedFileData = repo.GetAllAnalyzedFileData();
         }
 
         [TestMethod]
         public void TestInsertData()
         {
-            MediaMetadataRepo repo = new MediaMetadataRepo();
+            MediaMetadataRepo repo = MediaMetadataRepo.Instance();
             repo.Add(new FileMetadata(new FileInfo(@"c:\test\test.JPG")));
-        }
-
-        [TestMethod]
-        public void LocalDb()
-        {
-            MediaMetadataRepo repo = new MediaMetadataRepo();
-            repo.Test();
         }
     }
 }

@@ -13,6 +13,7 @@ namespace SB01.Core
         private string _destinationDirectory;
         private string _archiveDirectory;
         private string[] _supportedExtensions = { ".jpg", ".jpeg", ".bmp", ".gif", ".ico", ".jpe", ".png", ".tiff", ".tif" };
+        private bool _useYearStructure = false;
 
         public Renamer(string destinationDirectory)
         {
@@ -25,7 +26,14 @@ namespace SB01.Core
             _archiveDirectory = archiveDirectory;
         }
 
-        private void RenameFile(string sourceFilePath, string defaultTag = null, bool useYearFolders = true)
+        public Renamer(string destinationDirectory, string archiveDirectory, bool useYearStructure)
+        {
+            _destinationDirectory = destinationDirectory;
+            _archiveDirectory = archiveDirectory;
+            _useYearStructure = useYearStructure;
+        }
+
+        private void RenameFile(string sourceFilePath, string defaultTag = null)
         {
             string targetDirectory;
             string targetFilePath;
@@ -40,7 +48,7 @@ namespace SB01.Core
             }
 
             DateTime? dateTaken = GetDateTaken(sourceFilePath);
-            if (useYearFolders)
+            if (_useYearStructure)
             {
                 string yearStr = dateTaken.HasValue ? dateTaken.Value.ToString("yyyy") : "~";
                 if (Path.GetDirectoryName(targetDirectory) != yearStr
@@ -59,17 +67,18 @@ namespace SB01.Core
             if (targetFilePath == null) // duplicate found, skipping
             {
                 Log.Info("Exact match found, skipping: " + targetFilePath);
-                return;
             }
-
-            if (useYearFolders)
+            else
             {
-                targetFilePath = YearOrganizerator(targetFilePath, dateTaken);
+                if (_useYearStructure)
+                {
+                    targetFilePath = YearOrganizerator(targetFilePath, dateTaken);
+                }
+
+                // copy file to target
+                File.Copy(sourceFilePath, targetFilePath, false);
             }
-
-            // copy file to target
-            File.Copy(sourceFilePath, targetFilePath, false);
-
+            
             // archive old file
             if (!string.IsNullOrEmpty(_archiveDirectory))
             {
@@ -181,12 +190,19 @@ namespace SB01.Core
             DateTime? dateTaken = null;
             using (FileStream fs = new FileStream(fileInfo.FullName, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
-                BitmapSource img = BitmapFrame.Create(fs);
-                BitmapMetadata md = (BitmapMetadata)img.Metadata;
-                if (md != null && !string.IsNullOrEmpty(md.DateTaken))
+                try
                 {
-                    string date = md.DateTaken;
-                    dateTaken = DateTime.Parse(date);
+                    BitmapSource img = BitmapFrame.Create(fs);
+                    BitmapMetadata md = (BitmapMetadata)img.Metadata;
+                    if (md != null && !string.IsNullOrEmpty(md.DateTaken))
+                    {
+                        string date = md.DateTaken;
+                        dateTaken = DateTime.Parse(date);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Info(string.Format("Error obtaining bitmap metadata. {0}", ex.Message));
                 }
             }
 
@@ -236,7 +252,7 @@ namespace SB01.Core
             backgroundWorker.WorkerReportsProgress = true;
             backgroundWorker.DoWork += (sender, args) =>
             {
-                IEnumerable<string> files = Directory.GetFiles(sourceDirectoryPath);
+                IEnumerable<string> files = Directory.EnumerateFiles(sourceDirectoryPath, "*.*", SearchOption.AllDirectories); //Directory.GetFiles(sourceDirectoryPath);
 
                 int totalFiles = files.Count();
                 int i = 0;

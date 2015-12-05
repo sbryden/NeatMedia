@@ -9,6 +9,8 @@ namespace SB01.Core
     public class FileMetadata
     {
         private FileInfo _fileInfo;
+        public string OriginalFileName { get; set; }
+        public bool IsInDb { get; set; }
 
         public string FileName
         {
